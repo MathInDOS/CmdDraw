@@ -131,7 +131,7 @@ To show images type cmddraw /dimg [image file] /x [X position] /y [Y position]
 
 # Some images of this tool
 
-<a href="https://ibb.co/whkNfrD"><img src="https://i.ibb.co/whkNfrD/Screen-Shot-20201224142957.png" alt="Screen-Shot-20201224142957" border="0"></a>
+<a href="https://ibb.co/whkNfrD"><img src="https://i.ibb.co/whkNfrD/Screen-Shot-20201224142957.png" alt="Screen-Shot-20201224142957" width="677" height="342" border="0"></a>
 
 # About
 
