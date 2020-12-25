@@ -133,6 +133,23 @@ To show images type cmddraw /dimg [image file] /x [X position] /y [Y position]
 
 <a href="https://gifyu.com/image/CWYQ"><img src="https://s8.gifyu.com/images/ScreenShot_20201224142957.png" alt="ScreenShot_20201224142957.png" border="0" /></a>
 
+
+<a href="https://gifyu.com/image/CWYG"><img src="https://s8.gifyu.com/images/ScreenShot_20201224143024.png" alt="ScreenShot_20201224143024.png" border="0" /></a>
+
+
+<a href="https://gifyu.com/image/CWrL"><img src="https://s8.gifyu.com/images/ScreenShot_20201224143046.png" alt="ScreenShot_20201224143046.png" border="0" /></a>
+
+
+<a href="https://gifyu.com/image/CWrs"><img src="https://s8.gifyu.com/images/ScreenShot_20201224143110.png" alt="ScreenShot_20201224143110.png" border="0" /></a>
+
+
+<a href="https://gifyu.com/image/CWrE"><img src="https://s8.gifyu.com/images/ScreenShot_20201224143139.png" alt="ScreenShot_20201224143139.png" border="0" /></a>
+
+
+<a href="https://gifyu.com/image/CWrd"><img src="https://s8.gifyu.com/images/ScreenShot_20201224143151.png" alt="ScreenShot_20201224143151.png" border="0" /></a>
+
+
+
 # About
 
 Merry christmas all of you! :)
