@@ -21,10 +21,20 @@
  + Easily choose colors by R(Red) G(Green) B(Blue) ratio.
  + Draw with effective shapes.
  
+ 
+ CmdDraw Version-1.2 Build Date: 31 December 2020
+ + Added draw star function.
+ + Write more effective with select your font and size.
+ + Added Font function.
+ + Added Hex2RGB program to easily select RGB colors.
+ + Fix little bugs.
+ + Security fixes.
+ 
  Bugs:
  -----
  - To draw Ellipse you may faced some Math issues.
  - Sometimes if parameters are wrong or missing then "APPCRASH".
+ - If you are using Windows 10 and in cmd if legacy mode isn't enable the this program doesn't working anymore.
  
  Contact:
  --------
@@ -41,6 +51,8 @@
 
 int wmain(int argc, wchar_t *argv[])
 {
+	// startup config
+	
 	if(argv[1]==NULL)return 1;
 	HDC hdc = GetDC(GetConsoleWindow());
 
@@ -437,8 +449,1080 @@ int wmain(int argc, wchar_t *argv[])
 			gf.FillPolygon(&brush, points, 5);
 		}else{
 			return 0;
+		}}
+		
+	    /* draw star */
+		else if(!_wcsicmp(argv[1], L"/dstar") && !_wcsicmp(argv[24], L"/rgb") && !_wcsicmp(argv[28], L"/pw"))
+		{
+			if(argv[2]==NULL)return 1; if(argv[3]==NULL)return 1; if(argv[4]==NULL)return 1; if(argv[5]==NULL)return 1; if(argv[6]==NULL)return 1; if(argv[7]==NULL)return 1; if(argv[8]==NULL)return 1; if(argv[9]==NULL)return 1; if(argv[10]==NULL)return 1; if(argv[11]==NULL)return 1; if(argv[12]==NULL)return 1; if(argv[13]==NULL)return 1; if(argv[14]==NULL)return 1; if(argv[15]==NULL)return 1; if(argv[16]==NULL)return 1; if(argv[17]==NULL)return 1; if(argv[18]==NULL)return 1; if(argv[19]==NULL)return 1; if(argv[20]==NULL)return 1; if(argv[21]==NULL)return 1; if(argv[22]==NULL)return 1; if(argv[23]==NULL)return 1;
+
+			float x1 = (float)wcstol(argv[2], nullptr, 0);
+			float x2 = (float)wcstol(argv[3], nullptr, 0);
+			float x3 = (float)wcstol(argv[4], nullptr, 0);
+			float x4 = (float)wcstol(argv[5], nullptr, 0);
+			float x5 = (float)wcstol(argv[6], nullptr, 0);
+			float x6 = (float)wcstol(argv[7], nullptr, 0);
+			float x7 = (float)wcstol(argv[8], nullptr, 0);
+			float x8 = (float)wcstol(argv[9], nullptr, 0);
+			float x9 = (float)wcstol(argv[10], nullptr, 0);
+			float x10 = (float)wcstol(argv[11], nullptr, 0);
+			float x11 = (float)wcstol(argv[12], nullptr, 0);
+			float x12 = (float)wcstol(argv[13], nullptr, 0);
+			float x13 = (float)wcstol(argv[14], nullptr, 0);
+			float x14 = (float)wcstol(argv[15], nullptr, 0);
+			float x15 = (float)wcstol(argv[16], nullptr, 0);
+			float x16 = (float)wcstol(argv[17], nullptr, 0);
+			float x17 = (float)wcstol(argv[18], nullptr, 0);
+			float x18 = (float)wcstol(argv[19], nullptr, 0);
+			float x19 = (float)wcstol(argv[20], nullptr, 0);
+			float x20 = (float)wcstol(argv[21], nullptr, 0);
+			float x21 = (float)wcstol(argv[22], nullptr, 0);
+			float x22 = (float)wcstol(argv[23], nullptr, 0);
+
+			if(argv[25]==NULL)return 1; if(argv[26]==NULL)return 1; if(argv[27]==NULL)return 1; if(argv[29]==NULL)return 1;
+
+			int r = (int)wcstol(argv[25], nullptr, 0);
+			int g = (int)wcstol(argv[26], nullptr, 0);
+			int b = (int)wcstol(argv[27], nullptr, 0);
+			int size = (int)wcstol(argv[29], nullptr, 0);
+
+			Gdiplus::Pen pen(Gdiplus::Color(r, g, b), size);
+			Gdiplus::Point point1(x1, x2);
+			Gdiplus::Point point2(x3, x4);
+			Gdiplus::Point point3(x5, x6);
+			Gdiplus::Point point4(x7, x8);
+			Gdiplus::Point point5(x9, x10);
+			Gdiplus::Point point6(x11, x12);
+			Gdiplus::Point point7(x13, x14);
+			Gdiplus::Point point8(x15, x16);
+			Gdiplus::Point point9(x17, x18);
+			Gdiplus::Point point10(x19, x20);
+			Gdiplus::Point point11(x21, x22);
+
+			Gdiplus::Point points[11] = {point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11};
+
+			gf.SetSmoothingMode(Gdiplus::SmoothingModeHighQuality);
+			gf.DrawPolygon(&pen, points, 11);
+			
+			/* fill up */
+			if(!_wcsicmp(argv[30], L"/fill") && !_wcsicmp(argv[31], L"/rgb"))
+			{
+				if(argv[31]==NULL)return 1; if(argv[32]==NULL)return 1; if(argv[33]==NULL)return 1; if(argv[34]==NULL)return 1;
+
+				int r = (int)wcstol(argv[32], nullptr, 0);
+				int g = (int)wcstol(argv[33], nullptr, 0);
+				int b = (int)wcstol(argv[34], nullptr, 0);
+				Gdiplus::SolidBrush brush(Gdiplus::Color(r, g, b));
+				gf.FillPolygon(&brush, points, 11);
+
+			}else{
+				return 0;
+			}
 		}
-	}
+		
+		/* draw text */
+		else if(!_wcsicmp(argv[1], L"/dtext") && !_wcsicmp(argv[3], L"/x") && !_wcsicmp(argv[5], L"/y") && !_wcsicmp(argv[7], L"/ff") && !_wcsicmp(argv[9], L"/fs") && !_wcsicmp(argv[11], L"/rgb") && !_wcsicmp(argv[15], L"/pw"))
+		{
+			if(argv[2]==NULL)return 1; if(argv[4]==NULL)return 1; if(argv[6]==NULL)return 1; if(argv[8]==NULL)return 1; if(argv[10]==NULL)return 1; if(argv[12]==NULL)return 1; if(argv[13]==NULL)return 1; if(argv[14]==NULL)return 1; if(argv[15]==NULL)return 1; if(argv[16]==NULL)return 1;
+			if(_wtoi(argv[10]) > 100 || _wtoi(argv[10]) < 1) return 1;
+			
+			float x1 = (float)wcstol(argv[4], nullptr, 0);
+			float x2 = (float)wcstol(argv[6], nullptr, 0);
+
+			int r = (int)wcstol(argv[12], nullptr, 0);
+			int g = (int)wcstol(argv[13], nullptr, 0);
+			int b = (int)wcstol(argv[14], nullptr, 0);
+			int size = (int)wcstol(argv[16], nullptr, 0);
+
+			Gdiplus::SolidBrush brush(Gdiplus::Color(r, g, b));
+			
+			/* Arial */
+			if(!_wcsicmp(argv[8], L"ari"))
+			{
+				Gdiplus::FontFamily ff(L"Arial", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* arial black */
+			else if(!_wcsicmp(argv[8], L"arib"))
+			{
+				Gdiplus::FontFamily ff(L"Arial Black", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Calibri */
+			else if(!_wcsicmp(argv[8], L"calb"))
+			{
+				Gdiplus::FontFamily ff(L"Calibri", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Calibri Light */
+			else if(!_wcsicmp(argv[8], L"calbl"))
+			{
+				Gdiplus::FontFamily ff(L"Calibri Light", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Cambria */
+			else if(!_wcsicmp(argv[8], L"cambr"))
+			{
+				Gdiplus::FontFamily ff(L"Cambria", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Cambria Math */
+			else if(!_wcsicmp(argv[8], L"cambrm"))
+			{
+				Gdiplus::FontFamily ff(L"Cambria Math", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Candara */
+			else if(!_wcsicmp(argv[8], L"candr"))
+			{
+				Gdiplus::FontFamily ff(L"Candara", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* comic sans ms */
+			else if(!_wcsicmp(argv[8], L"csms"))
+			{
+				Gdiplus::FontFamily ff(L"Comic Sans MS", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* consolas */
+			else if(!_wcsicmp(argv[8], L"cslas"))
+			{
+				Gdiplus::FontFamily ff(L"Consolas", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* constatia */
+			else if(!_wcsicmp(argv[8], L"cstia"))
+			{
+				Gdiplus::FontFamily ff(L"Constantia", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* cobel */
+			else if(!_wcsicmp(argv[8], L"cbel"))
+			{
+				Gdiplus::FontFamily ff(L"Corbel", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* courier new */
+			else if(!_wcsicmp(argv[8], L"courn"))
+			{
+				Gdiplus::FontFamily ff(L"Courier New", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* gabriola */
+			else if(!_wcsicmp(argv[8], L"grola"))
+			{
+				Gdiplus::FontFamily ff(L"Gabriola", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* geogia */
+			else if(!_wcsicmp(argv[8], L"geogia"))
+			{
+				Gdiplus::FontFamily ff(L"Georgia", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* impact */
+			else if(!_wcsicmp(argv[8], L"impct"))
+			{
+				Gdiplus::FontFamily ff(L"Impact", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* lucida console */
+			else if(!_wcsicmp(argv[8], L"luic"))
+			{
+				Gdiplus::FontFamily ff(L"Lucida Console", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* lucida sans unicode */
+			else if(!_wcsicmp(argv[8], L"lusu"))
+			{
+				Gdiplus::FontFamily ff(L"Lucida Sans Unicode", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* microsoft sans serif */
+			else if(!_wcsicmp(argv[8], L"mssf"))
+			{
+				Gdiplus::FontFamily ff(L"Microsoft Sans Serif", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* palatino linotype */
+			else if(!_wcsicmp(argv[8], L"plin"))
+			{
+				Gdiplus::FontFamily ff(L"Palatino Linotype", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* segoe print */
+			else if(!_wcsicmp(argv[8], L"sepri"))
+			{
+				Gdiplus::FontFamily ff(L"Segoe Print", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* segoe script */
+			else if(!_wcsicmp(argv[8], L"segsr"))
+			{
+				Gdiplus::FontFamily ff(L"Segoe Script", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* seogoe ui */
+			else if(!_wcsicmp(argv[8], L"segui"))
+			{
+				Gdiplus::FontFamily ff(L"Segoe UI", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* segoe ui light */
+			else if(!_wcsicmp(argv[8], L"segul"))
+			{
+				Gdiplus::FontFamily ff(L"Segoe UI Light", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			/* Segoe UI Semibold */
+			else if(!_wcsicmp(argv[8], L"segus"))
+			{
+				Gdiplus::FontFamily ff(L"Segoe UI Semibold", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Tahoma */
+			else if(!_wcsicmp(argv[8], L"toma"))
+			{
+				Gdiplus::FontFamily ff(L"Tahoma", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Times new roman */
+			else if(!_wcsicmp(argv[8], L"timnr"))
+			{
+				Gdiplus::FontFamily ff(L"Times New Roman", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Trebuchet MS */
+			else if(!_wcsicmp(argv[8], L"trems"))
+			{
+				Gdiplus::FontFamily ff(L"Trebuchet MS", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else{
+					return 1;
+				}
+			}
+			
+			/* Verdana */
+			else if(!_wcsicmp(argv[8], L"verdna"))
+			{
+				Gdiplus::FontFamily ff(L"Verdana", nullptr);
+
+				if(!_wcsicmp(argv[10], L"regular"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"italic"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleItalic, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"bold"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleBold, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"undrlne"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleUnderline, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+				else if(!_wcsicmp(argv[10], L"strkout"))
+				{
+					Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleStrikeout, Gdiplus::UnitPixel);
+					gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+				}
+
+				else{
+					return 1;
+				}
+			}
+			
+			/* own selected font */
+			else{
+				Gdiplus::FontFamily ff(argv[8], nullptr);
+				Gdiplus::Font getf(&ff, size, Gdiplus::FontStyleRegular, Gdiplus::UnitPixel);
+			    gf.DrawString(argv[2], -1, &getf, Gdiplus::PointF(x1, x2), &brush);
+		}}
+	
 	/* change color */
 	else if(!_wcsicmp(argv[1], L"/color"))
 	{
@@ -487,7 +1571,7 @@ int wmain(int argc, wchar_t *argv[])
 		std::wcout << "CmdDraw Version-";
 		std::wcout << "1.0" << std::endl;
 		std::wcout << "Copyright (C) 2018-2020 MathInDOS" << std::endl;
-		std::wcout << "Build Date: 24 December 2020" << std::endl << std::endl;
+		std::wcout << "Build Date: 31 December 2020" << std::endl << std::endl;
 		std::wcout << "----- Usage -----" << std::endl << std::endl;
 		std::wcout << "cmddraw /dimg [image path] /x [x position] /y [y position]" << std::endl;
 		std::wcout << "cmddraw /dline [ax position] [ay position] [bx position] [by position] /rgb [red green blue] /pw [size]" << std::endl;
@@ -501,10 +1585,13 @@ int wmain(int argc, wchar_t *argv[])
 		std::wcout << "cmddraw /dcir [x y radius] /rgb [red green blue] /pw [size]" << std::endl;
 		std::wcout << "cmddraw /dpie [p1 p2 p3 p4 p5 p6 points and angle and sweepPoint] /rgb [red green blue] /pw [size]" << std::endl;
 		std::wcout << "cmddraw /dpol [p1 p2 p3 p4 p5 p6 p7 p8 p9 p10] /rgb [red green blue] /pw [size]" << std::endl;
+		std::wcout << "cmddraw /dstar [p1 p2 p3...p22] /rgb [red green blue] /pw [size]" << std::endl;
+		std::wcout << "cmddraw /dtext [text] /x [x position] /y [y position] /ff [font name] /fs [font style] /rgb [red green blue] /pw [size]" << std::endl;
 		std::wcout << "cmddraw /color [color code]" << std::endl;
 		std::wcout << "cmddraw /trans /con [percentage]" << std::endl << std::endl;
 		std::wcout << "If you need more help type [command]--h for more info about a command." << std::endl;
 		std::wcout << "Join Our Discord Server at: https://discord.gg/E5qYx7WYef" << std::endl;
+		std::wcout << "Happy New Year! Stay Awesome! :3" << std::endl;
 		return 0;
 
 	}
@@ -596,6 +1683,20 @@ int wmain(int argc, wchar_t *argv[])
 		std::wcout << "Ex. cmddraw /dpol 100 100 200 130 150 200 50 200 0 130 /rgb 0 255 0 /pw 5" << std::endl;
 		return 0;
 	}
+	else if(!_wcsicmp(argv[1], L"/dtext--h"))
+	{
+		std::wcout << "Draw text" << std::endl;
+		std::wcout << "cmddraw /dtext [text] /x [x position] /y [y position] /ff [font name] /fs [font style] /rgb [red green blue] /pw [size]" << std::endl;
+		std::wcout << "Ex. cmddraw /dtext hello /x 30 /y 30 /ff webdings /fs italic /rgb 0 255 0 /pw 40" << std::endl;
+		return 0;
+	}
+	else if(!_wcsicmp(argv[1], L"/dstar--h"))
+	{
+		std::wcout << "Draw star" << std::endl;
+		std::wcout << "cmddraw /dstar [p1 p2 p3...p22] /rgb [red green blue] /pw [size]" << std::endl;
+		std::wcout << "cmddraw /dstar 10 85 85 75 110 10 135 75 210 85 160 125 170 190 110 150 50 190 60 125 10 85 /rgb 0 255 0 /pw 5" << std::endl;
+		return 0;
+	}
 	else if(!_wcsicmp(argv[1], L"/color--h"))
 	{
 		std::wcout << "Change color" << std::endl;
@@ -624,7 +1725,3 @@ int wmain(int argc, wchar_t *argv[])
 	}
 	return 0;
 }
-
-
-
-
